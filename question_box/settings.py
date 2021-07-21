@@ -54,6 +54,7 @@ INSTALLED_APPS = [
 
     # Project-specific
     'questions',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -140,6 +141,8 @@ STATICFILES_DIRS = [
 ]
 
 # Custom user model
+
+AUTH_USER_MODEL = 'accounts.UserAccount'
 
 INTERNAL_IPS = [
     # ...
