@@ -20,6 +20,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/accounts/', include('accounts.urls') ),
 ]
 
 ##format_suffix_patterns is an optional choice that provides a simple, DRY way to refer to a specific file format for a URL endpoint. 
