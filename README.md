@@ -92,6 +92,11 @@ If you need to switch how you access your data based on environment, read [this 
 
 You can work with a back-end dev to get the back-end API running on your local machine, but you do not have to.
 
-
+#### my Questions:
+why password and token are different? 
 ### Notes from accouts app:
 password > 6 digits 
+must login using email address
+URLs:
+-sign up: /api/accounts/signup 
+
