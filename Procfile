@@ -1,1 +1,1 @@
-gunicorn question_box.wsgi
+web:gunicorn question_box.wsgi
