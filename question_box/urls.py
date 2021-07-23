@@ -21,7 +21,11 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/accounts/', include('accounts.urls') ),
+<<<<<<< HEAD
     path('api/comments/', include('comments.urls') ),
+=======
+    path('api/questions/', include('questions.urls')),
+>>>>>>> 2703dadf1d141bbc9e15549021e02465477fffea
     ## djoser start 
     path("auth/", include("djoser.urls")),
     path("auth/", include("djoser.urls.authtoken")),
