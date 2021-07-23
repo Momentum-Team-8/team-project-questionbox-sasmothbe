@@ -1,8 +1,5 @@
 from django.db import models
 from accounts.models import UserAccount
-### CONTENT TYPE
-from django.contrib.contenttypes.models import ContentType
-
 from questions.models import Question
 
 # Create your models here.
@@ -19,11 +16,6 @@ class Answer(models.Model):
     def __str__(self):
         return f"{self.answer_author.name} {self.question.title}: {self.id}"
 
+    class Meta:
+        ordering = ["accepted", "created_at"]
 
-
-    ### content type 
-    @property
-    def get_content_type(self):
-        instance = self
-        content_type = ContentType.objects.get_for_model(instance.__class__)
-        return content_type

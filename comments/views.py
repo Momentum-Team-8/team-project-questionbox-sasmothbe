@@ -25,18 +25,14 @@ from answers.pagination import AnswerLimitOffsetPagination,AnswerPageNumberpagin
 
 
 from comments.models import Comment
-from .serializers import (CommentDetailSerializer, 
-                        CommentSerializer,
-                        CommentChildSerializer,
-                        )
+from .serializers import CommentSerializer
+                        
 
 
 ### comment details 
-#### only parent comments
 class CommentDetail(RetrieveAPIView):
-    ### only parent comments ***
-    queryset = Comment.objects.filter(parent=None)
-    serializer_class = CommentDetailSerializer
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
 
     
 ### comment delete   

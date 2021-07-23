@@ -100,3 +100,6 @@ must login using email address
 URLs:
 -sign up: /api/accounts/signup 
 
+### issues:
+- 1) need to fix accepted question, only user can do it.
+- 2) need to add relationship in comments. 
