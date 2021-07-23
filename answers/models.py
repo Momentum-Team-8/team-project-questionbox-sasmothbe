@@ -17,7 +17,7 @@ class Answer(models.Model):
                                related_name="answers",null=True)
 
     def __str__(self):
-        return f"{self.answer_author.name} {self.question.question}: {self.answer.id}"
+        return f"{self.answer_author.name} {self.question.title}: {self.id}"
 
 
 

@@ -14,15 +14,15 @@ from rest_framework.generics import (
     )
 from rest_framework.permissions import(
     AllowAny,
-    IsAdminUser,
+    IsAuthenticatedOrReadOnly
 )
 
 ##### import comments ... start --
 from comments.serializers import CommentSerializer
 from comments.models import Comment
-
-
 ##### import comments ... end --
+
+from .permissions import IsOwnerOrReadOnly
 
 from .models import Answer
 from .serializers import AnswerDetailSerializer,AnswerCreateSerializer
@@ -32,7 +32,7 @@ from .pagination import AnswerLimitOffsetPagination,AnswerPageNumberpagination
 # Create your views here.
 
 
-###  list books ---- and add/create
+###  ** list answers ---- and add/create
 class AnswerList(ListCreateAPIView):
     permission_classes = (AllowAny, )
     # queryset = Book.objects.all()
@@ -49,7 +49,7 @@ class AnswerList(ListCreateAPIView):
     filter_backends = [SearchFilter, OrderingFilter]
     search_fields = ['answer']
     
-    # books/?q=book
+    # answers/?q=answer
     def get_queryset(self, *args, **kwargs):
         queryset_list = Answer.objects.all()
         query = self.request.GET.get("q")
@@ -62,13 +62,13 @@ class AnswerList(ListCreateAPIView):
     
 
 
-### Book details 
+### ** Answer details 
 class AnswerDetail(RetrieveAPIView):
     queryset = Answer.objects.all()
     serializer_class = AnswerDetailSerializer
 
     
-### Book delete   
+### ** Answer delete   
 class AnswerDelete(DestroyAPIView):
     ### only admin and update and delete ... 
     queryset = Answer.objects.all()
@@ -76,9 +76,9 @@ class AnswerDelete(DestroyAPIView):
     permission_classes = [IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly]
 
 
-### Book update  
+### ** Book update  
 ### retrive update view gives us pre filled details ... 
-class BookUpdate(RetrieveUpdateAPIView):
+class AnswerUpdate(RetrieveUpdateAPIView):
     ### only admin and update and delete ... 
     queryset = Answer.objects.all()
     serializer_class = AnswerCreateSerializer

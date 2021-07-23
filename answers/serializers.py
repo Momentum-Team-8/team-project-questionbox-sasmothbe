@@ -21,29 +21,24 @@ class AnswerDetailSerializer(serializers.ModelSerializer):
 
 ## url
 answer_detail_url = HyperlinkedIdentityField(
-        view_name='detail',
+        view_name='answer_detail',
         lookup_field='pk'
     )
 
 ### delete url
-book_delete_url = HyperlinkedIdentityField(
-        view_name='delete',
+answer_delete_url = HyperlinkedIdentityField(
+        view_name='answer_update',
         lookup_field='pk'
     )
-class BookCreateSerializer(serializers.ModelSerializer):
-    url= book_detail_url 
-    delete_url= book_delete_url 
+class AnswerCreateSerializer(serializers.ModelSerializer):
+    url= answer_detail_url 
+    delete_url= answer_delete_url 
     
     class Meta:
-        model = Book
+        model = Answer
         fields = [
             'url',
             'delete_url',
-            'title',
-            'slug',
-            'author',
-            'description',
-            'featured',
-            'publication_date',
-        
+            'accepted',
+            'answer',
         ]

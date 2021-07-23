@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+from answers.models import Answer
 
 from django.conf import settings
 from django.contrib.contenttypes.fields import GenericForeignKey
@@ -21,12 +22,13 @@ class CommentManager(models.Manager):
         return qs
 
 class Comment(models.Model):
+    ### answer
     comment_user = models.ForeignKey(UserAccount, on_delete=models.CASCADE,
                     related_name="comments",null=True)
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
-    parent      = models.ForeignKey("self", null=True, blank=True)
+    parent      = models.ForeignKey("self", null=True, blank=True,on_delete=models.CASCADE)
     content     = models.TextField()
     created_at  = models.DateTimeField(auto_now_add=True)
     objects = CommentManager()
@@ -39,7 +41,8 @@ class Comment(models.Model):
         return str(self.comment_user.name)
 
     def __str__(self):
-        return str(self.comment_user.name)
+        ### self.question.title
+        return f"{self.comment_user.name}: {self.id}"
 
     def get_absolute_url(self):
         return reverse("comments:thread", kwargs={"id": self.id})

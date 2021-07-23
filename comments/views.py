@@ -54,7 +54,7 @@ class CommentList(ListAPIView):
     permission_classes = (AllowAny, )
     serializer_class = CommentSerializer
     ### pagination 
-    pagination_class = CommentPageNumberpagination
+    pagination_class = AnswerPageNumberpagination
 
     ## user show the user as requested ****
     def perform_create(self, serializer):

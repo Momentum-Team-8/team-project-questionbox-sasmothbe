@@ -23,6 +23,7 @@ urlpatterns = [
     path('api/accounts/', include('accounts.urls') ),
     path('api/comments/', include('comments.urls') ),
     path('api/questions/', include('questions.urls')),
+    path('api/answers/', include('answers.urls')),
     ## djoser start 
     path("auth/", include("djoser.urls")),
     path("auth/", include("djoser.urls.authtoken")),
