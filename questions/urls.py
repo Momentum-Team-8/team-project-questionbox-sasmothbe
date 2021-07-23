@@ -1,8 +1,10 @@
-from django.urls import path
-from questions. views import QuestionDetail, QuestionList
+from django.urls import path, include
+from questions import views 
 
 
 urlpatterns = [
-    path('questions', QuestionList.as_view()),
-    path('questions/<int:pk>/', QuestionDetail.as_view()),
+    path('api-auth/', include('rest_framework.urls')),
+    path('', views.QuestionList.as_view(), name='question-list'),
+    path('<int:pk>/', views.QuestionDetail.as_view(), name='question-detail'),
 ]
+
