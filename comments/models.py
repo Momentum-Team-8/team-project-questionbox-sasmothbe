@@ -1,37 +1,21 @@
 from __future__ import unicode_literals
-from answers.models import Answer
 
 from django.conf import settings
-from django.contrib.contenttypes.fields import GenericForeignKey
-from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse
 from django.db import models
 
 from accounts.models import UserAccount
+from answers.models import Answer
 
-
-class CommentManager(models.Manager):
-    def all(self):
-        qs = super(CommentManager, self).filter(parent=None)
-        return qs
-
-    def filter_by_instance(self, instance):
-        content_type = ContentType.objects.get_for_model(instance.__class__)
-        obj_id = instance.id
-        qs = super(CommentManager, self).filter(content_type=content_type, object_id= obj_id).filter(parent=None)
-        return qs
 
 class Comment(models.Model):
     ### answer
+    answer = models.ForeignKey(Answer, on_delete=models.CASCADE,
+                    related_name="comments",null=True)
     comment_user = models.ForeignKey(UserAccount, on_delete=models.CASCADE,
                     related_name="comments",null=True)
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
-    content_object = GenericForeignKey('content_type', 'object_id')
-    parent      = models.ForeignKey("self", null=True, blank=True,on_delete=models.CASCADE)
     content     = models.TextField()
     created_at  = models.DateTimeField(auto_now_add=True)
-    objects = CommentManager()
 
     class Meta:
         ordering = ['-created_at']
@@ -42,7 +26,7 @@ class Comment(models.Model):
 
     def __str__(self):
         ### self.question.title
-        return f"{self.comment_user.name}: {self.id}"
+        return f"{self.comment_user.name} answer id:{self.answer} comment id:{self.id}"
 
     def get_absolute_url(self):
         return reverse("comments:thread", kwargs={"id": self.id})
@@ -50,12 +34,7 @@ class Comment(models.Model):
     def get_delete_url(self):
         return reverse("comments:delete", kwargs={"id": self.id})
         
-    def children(self): #replies
-        return Comment.objects.filter(parent=self)
 
-    @property
-    def is_parent(self):
-        if self.parent is not None:
-            return False
-        return True
+
+
 

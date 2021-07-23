@@ -76,7 +76,7 @@ class AnswerDelete(DestroyAPIView):
     permission_classes = [IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly]
 
 
-### ** Book update  
+### ** Answer update  
 ### retrive update view gives us pre filled details ... 
 class AnswerUpdate(RetrieveUpdateAPIView):
     ### only admin and update and delete ... 
