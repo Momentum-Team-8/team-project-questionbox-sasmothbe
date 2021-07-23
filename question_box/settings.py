@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     # Project-specific
     'questions',
     'accounts',
+    'answers',
+    'comments',
 ]
 
 MIDDLEWARE = [
