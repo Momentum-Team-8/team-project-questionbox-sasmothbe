@@ -6,4 +6,4 @@ urlpatterns = [
     
 ]
 
-## signin: http://localhost:8000/api/token/
+## signin: http://localhost:8000/api/token/???
