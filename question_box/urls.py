@@ -22,16 +22,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/accounts/', include('accounts.urls') ),
     path('api/questions/', include('questions.urls')),
+    ## djoser start 
+    path("auth/", include("djoser.urls")),
+    path("auth/", include("djoser.urls.authtoken")),
+    ## djoser end    
 ]
 
-##format_suffix_patterns is an optional choice that provides a simple, DRY way to refer to a specific file format for a URL endpoint. 
-urlpatterns = format_suffix_patterns(urlpatterns)
-
-if settings.DEBUG:
-    import debug_toolbar
-    urlpatterns = [
-        path('__debug__/', include(debug_toolbar.urls)),
-
-        # For django versions before 2.0:
-        # url(r'^__debug__/', include(debug_toolbar.urls)),
-    ] + urlpatterns

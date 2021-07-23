@@ -8,10 +8,11 @@ django = "*"
 djangorestframework = "*"
 django-environ = "*"
 django-extensions = "*"
-django-debug-toolbar = "*"
 psycopg2-binary = "*"
 django-on-heroku = "*"
 gunicorn = "*"
+django-cors-headers = "*"
+djoser = "*"
 
 [dev-packages]
 
