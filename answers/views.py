@@ -45,9 +45,9 @@ class AnswerList(ListCreateAPIView):
         serializer.save(user=self.request.answer_author)
     
     #### restframe search
-    # answers/?search=book&ordeing=answer
+    # answers/?search=think
     filter_backends = [SearchFilter, OrderingFilter]
-    search_fields = ['answer']
+    search_fields = ['answer',]
     
     # answers/?q=answer
     def get_queryset(self, *args, **kwargs):
@@ -64,6 +64,7 @@ class AnswerList(ListCreateAPIView):
 
 ### ** Answer details 
 class AnswerDetail(RetrieveAPIView):
+    permission_classes = (AllowAny, )
     queryset = Answer.objects.all()
     serializer_class = AnswerDetailSerializer
 
@@ -78,10 +79,14 @@ class AnswerDelete(DestroyAPIView):
 
 ### ** Answer update  
 ### retrive update view gives us pre filled details ... 
+
+### question author can update accept; answer author can update other fields;
 class AnswerUpdate(RetrieveUpdateAPIView):
     ### only admin and update and delete ... 
     queryset = Answer.objects.all()
     serializer_class = AnswerCreateSerializer
     permission_classes = [IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly]
+
+    
 
 

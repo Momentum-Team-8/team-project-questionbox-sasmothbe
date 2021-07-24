@@ -20,7 +20,6 @@ class AnswerDetailSerializer(serializers.ModelSerializer):
             'user',
             'answer',
             'created_at',
-            'accepted',
             'comments',
         ]
     
@@ -61,6 +60,20 @@ class AnswerCreateSerializer(serializers.ModelSerializer):
             'id',
             'url',
             'delete_url',
-            'accepted',
             'answer',
         ]
+
+
+class AcceptAnswerSerializer(serializers.ModelSerializer):
+### turn users to show name 
+    user = SerializerMethodField()
+    class Meta:
+        model = Answer
+        fields = [
+            'id',
+            'user'
+        ]
+    
+    def get_user(self,obj):
+        #### question author name 
+        return str(obj.question.author.name)

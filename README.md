@@ -102,4 +102,11 @@ URLs:
 
 ### issues:
 - 1) need to fix accepted question, only user can do it.
-- 2) need to add relationship in comments. 
+- 2) comments edit and delete does not work, the id has  issues. 
+- 3) count like/vote
+
+
+### Study Plan:
+- 1) cunstomise user model 
+- 2) search ...
+- 3) 

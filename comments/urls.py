@@ -10,6 +10,6 @@ from .views import (
 
 urlpatterns = [
     url('', CommentList.as_view(), name='list'),
-    url('<int:pk>/', CommentDetail.as_view(), name='thread'),
+    url('<int:answer_id>/<int:pk>/', CommentDetail.as_view(), name='thread'),
     url('<int:pk>/delete/', CommentDelete.as_view(), name='delete'),
 ]

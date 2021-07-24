@@ -31,6 +31,8 @@ from .serializers import CommentSerializer
 
 ### comment details 
 class CommentDetail(RetrieveAPIView):
+    answer_id = Comment.answer_id
+    permission_classes = (AllowAny, )
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 
