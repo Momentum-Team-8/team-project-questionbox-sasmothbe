@@ -77,3 +77,8 @@ class AcceptAnswerSerializer(serializers.ModelSerializer):
     def get_user(self,obj):
         #### question author name 
         return str(obj.question.author.name)
+
+
+### 
+class PrivaField(serializers.HyperlinkedModelSeralizer):
+    

@@ -59,8 +59,6 @@ class AnswerList(ListCreateAPIView):
             ).distinct()
         return queryset_list
 
-    
-
 
 ### ** Answer details 
 class AnswerDetail(RetrieveAPIView):
@@ -87,6 +85,7 @@ class AnswerUpdate(RetrieveUpdateAPIView):
     serializer_class = AnswerCreateSerializer
     permission_classes = [IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly]
 
-    
+
+
 
 
