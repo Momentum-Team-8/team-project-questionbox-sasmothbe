@@ -78,7 +78,3 @@ class AcceptAnswerSerializer(serializers.ModelSerializer):
         #### question author name 
         return str(obj.question.author.name)
 
-
-### 
-class PrivaField(serializers.HyperlinkedModelSeralizer):
-    
