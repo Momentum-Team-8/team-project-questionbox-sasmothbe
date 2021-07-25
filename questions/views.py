@@ -11,11 +11,14 @@ class QuestionList(generics.ListCreateAPIView):
     serializer_class = QuestionSerializer
     filter_backends = (filters.SearchFilter, filters.OrderingFilter)
     search_fields = [ 'title', 'tag' ]
+    
 
 class QuestionDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
+    
 
 class TagList(generics.ListAPIView):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
+    
