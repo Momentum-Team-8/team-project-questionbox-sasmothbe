@@ -11,7 +11,7 @@ class Answer(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     accepted = models.BooleanField(default=False)
     question = models.ForeignKey(Question, on_delete=models.CASCADE,
-                               related_name="answers",null=True)
+                               related_name="answers",null=True, blank=True)
 
     def __str__(self):
         return f"{self.answer_author.name} {self.question.title}: {self.id}"

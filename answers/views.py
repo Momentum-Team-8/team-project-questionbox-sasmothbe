@@ -41,7 +41,7 @@ from .pagination import AnswerLimitOffsetPagination,AnswerPageNumberpagination
 class AnswerCreate(CreateAPIView):
     queryset = Answer.objects.all()
     # permission_classes = [IsAuthenticated]
-    permission_classes = (AllowAny,)
+    permission_classes = [IsAuthenticated]
     serializer_class = AnswerCreateSerializer
 
     def perform_create(self, serializer):
