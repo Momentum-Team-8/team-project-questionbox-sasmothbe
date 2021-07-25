@@ -6,15 +6,16 @@ from rest_framework.filters import(
 )
 from django.db.models import query
 from rest_framework.generics import (
-    ListCreateAPIView,
     ListAPIView, 
     RetrieveAPIView,
     DestroyAPIView,
     RetrieveUpdateAPIView,
+    CreateAPIView
     )
 from rest_framework.permissions import(
     AllowAny,
-    IsAuthenticatedOrReadOnly
+    IsAuthenticatedOrReadOnly,
+    IsAuthenticated
 )
 
 ##### import comments ... start --
@@ -25,18 +26,36 @@ from comments.models import Comment
 from .permissions import IsOwnerOrReadOnly
 
 from .models import Answer
-from .serializers import AnswerDetailSerializer,AnswerCreateSerializer
+from .serializers import (
+    AnswerDetailSerializer,
+    AnswerCreateSerializer,
+    AnswerListSerializer,
+)
 
 from .pagination import AnswerLimitOffsetPagination,AnswerPageNumberpagination
 
 # Create your views here.
 
 
-###  ** list answers ---- and add/create
-class AnswerList(ListCreateAPIView):
-    permission_classes = (AllowAny, )
-    # queryset = Book.objects.all()
+#### Anser create
+class AnswerCreate(CreateAPIView):
+    queryset = Answer.objects.all()
+    # permission_classes = [IsAuthenticated]
+    permission_classes = (AllowAny,)
     serializer_class = AnswerCreateSerializer
+
+    def perform_create(self, serializer):
+        ### I think here should work !! 
+        ## answer_author=Answer.user_author
+        serializer.save(answer_author=self.request.user)
+
+
+###  ** list answers ---- and add/create
+class AnswerList(ListAPIView):
+    queryset = Answer.objects.all()
+    permission_classes = (AllowAny,)
+    # queryset = Book.objects.all()
+    serializer_class = AnswerListSerializer
     ### pagination 
     pagination_class = AnswerPageNumberpagination
 

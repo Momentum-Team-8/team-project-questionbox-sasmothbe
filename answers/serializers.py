@@ -36,6 +36,21 @@ class AnswerDetailSerializer(serializers.ModelSerializer):
         ### **** this place is great!!! end-- 
         return comments
 
+class AnswerCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Answer
+        fields = [
+            #'id',
+            'question', 
+            'answer',
+        ]
+
+        #### user is read only!! ***** this part is nice!!!
+        extra_kwargs ={
+            "answer_author": {'read_only': True }
+        }
+        
+
 
 ## url
 answer_detail_url = HyperlinkedIdentityField(
@@ -50,18 +65,30 @@ answer_delete_url = HyperlinkedIdentityField(
     )
 
 
-class AnswerCreateSerializer(serializers.ModelSerializer):
+class AnswerListSerializer(serializers.ModelSerializer):
     url= answer_detail_url 
     delete_url= answer_delete_url 
+    user = SerializerMethodField()
+    question_name = SerializerMethodField()
     
     class Meta:
         model = Answer
         fields = [
             'id',
+            'user',
+            'question', 
+            'question_name',
             'url',
             'delete_url',
             'answer',
+            'created_at',
         ]
+
+    def get_user(self,obj):
+        return str(obj.answer_author.name)
+    
+    def get_question_name(self,obj):
+        return str(obj.question.title)
 
 
 class AcceptAnswerSerializer(serializers.ModelSerializer):
