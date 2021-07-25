@@ -1,5 +1,8 @@
+from question_box.settings import DEBUG
 from django.urls import path, include
-from questions import views 
+from questions import views
+
+
 
 
 urlpatterns = [
@@ -7,5 +10,8 @@ urlpatterns = [
     path('', views.QuestionList.as_view(), name='question-list'),
     path('<int:pk>/', views.QuestionDetail.as_view(), name='question-detail'),
     path('tag/', views.TagList.as_view(), name='tag-list'),
+    
 ]
+
+
 
