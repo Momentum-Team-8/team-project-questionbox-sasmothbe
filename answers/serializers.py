@@ -91,6 +91,28 @@ class AnswerListSerializer(serializers.ModelSerializer):
         return str(obj.question.title)
 
 
+class AnswerListNoLinkSerializer(serializers.ModelSerializer):
+    user = SerializerMethodField()
+    question_name = SerializerMethodField()
+    
+    class Meta:
+        model = Answer
+        fields = [
+            'id',
+            'user',
+            'question', 
+            'question_name',
+            'answer',
+            'created_at',
+        ]
+
+    def get_user(self,obj):
+        return str(obj.answer_author.name)
+    
+    def get_question_name(self,obj):
+        return str(obj.question.title)
+
+
 class AcceptAnswerSerializer(serializers.ModelSerializer):
 ### turn users to show name 
     user = SerializerMethodField()
