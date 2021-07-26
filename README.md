@@ -106,6 +106,7 @@ URLs:
 - 3) count favorite 
 - 4) comments edit and delete does not work, the id has  issues.... 
 - 5) showing tag name for manay to many fields !!!**
+- 6) count answers on question list ~
 
 
 ### Study Plan:

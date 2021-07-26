@@ -35,12 +35,8 @@ class QuestionList(generics.ListAPIView):
 
 class QuestionDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Question.objects.all()
-<<<<<<< HEAD
-    serializer_class = QuestionSerializer
-    
-=======
     serializer_class = QuestionDetailSerializer
->>>>>>> 32a968e2173336a2fe0c28f0906ad226ba92aa5f
+
 
 class TagList(generics.ListAPIView):
     queryset = Tag.objects.all()
