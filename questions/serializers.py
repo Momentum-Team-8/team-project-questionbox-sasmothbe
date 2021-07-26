@@ -6,8 +6,6 @@ from rest_framework import serializers
 from rest_framework.serializers import SerializerMethodField
 
 class QuestionCreateSerializer(serializers.ModelSerializer):
-
-
     class Meta:
         model = Question
         fields = [
@@ -25,6 +23,7 @@ class QuestionCreateSerializer(serializers.ModelSerializer):
 
 class QuestionListSerializer(serializers.ModelSerializer):
     user = SerializerMethodField()
+    count_favorite = SerializerMethodField()
 
     class Meta:
         model = Question
@@ -35,12 +34,15 @@ class QuestionListSerializer(serializers.ModelSerializer):
             'body',
             'created_at',
             'favorited_by',
+            'count_favorite',
             'tags',
-            'answered',
         ]
 
     def get_user(self,obj):
         return str(obj.author.name)
+
+    def get_count_favorite(self,obj):
+        return obj.favorited_by.count()
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -55,6 +57,7 @@ class QuestionDetailSerializer(serializers.ModelSerializer):
     user = SerializerMethodField()
     ### answers
     answers = SerializerMethodField()
+    total_answers = SerializerMethodField()
     class Meta:
         model = Question
         fields = [
@@ -66,8 +69,9 @@ class QuestionDetailSerializer(serializers.ModelSerializer):
             'created_at',
             'favorited_by',
             'tags',
-            'answered',
+            'total_answers',
             'answers',
+
         ]
     
     def get_user(self,obj):
@@ -79,3 +83,7 @@ class QuestionDetailSerializer(serializers.ModelSerializer):
         q_qs = Answer.objects.filter(question_id=obj.id) 
         answers = AnswerListNoLinkSerializer(q_qs, many=True).data
         return answers
+
+    def get_total_answers(self, obj):
+        q_qs = Answer.objects.filter(question_id=obj.id) 
+        return q_qs.count()
