@@ -16,7 +16,9 @@ import environ
 
 env = environ.Env(
     # set casting, default value
-    DEBUG=(bool, False),)
+    DEBUG=(bool, False),
+    USE_S3=(bool, False),
+)
 environ.Env.read_env()
 
 
@@ -53,6 +55,7 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     'corsheaders',
     'django_extensions',
+    'storages',
 
     # Project-specific
     'questions',
@@ -186,3 +189,19 @@ REST_FRAMEWORK = {
 
 ### cors 
 CORS_ORIGIN_ALLOW_ALL = True 
+
+
+# AWS Config
+if env("USE_S3"):
+    AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
+    AWS_STORAGE_BUCKET_NAME = env("AWS_STORAGE_BUCKET_NAME")
+    AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
+    AWS_S3_OBJECT_PARAMETERS = {
+        "CacheControl": "max-age=86400",
+    }
+    AWS_DEFAULT_ACL = "public-read"
+    DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+    # To allow django-admin collectstatic to automatically put your static files in your bucket
+    # https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#settings
+    STATICFILES_STORAGE = "storages.backends.s3boto3.S3StaticStorage"
