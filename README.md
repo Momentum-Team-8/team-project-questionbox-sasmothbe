@@ -104,6 +104,7 @@ URLs:
 
 - 3) comments edit and delete does not work, the id has issues.... 
 - 5) showing tag name for manay to many fields !!!**
+- 3) not able to log in rest framekwork webpage ... 
 
 
 ### Study Plan:
