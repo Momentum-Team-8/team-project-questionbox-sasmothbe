@@ -91,3 +91,25 @@ You can [read more about approaches to building your front-end before the API is
 If you need to switch how you access your data based on environment, read [this article on create-react-app-environments](https://medium.com/@tacomanator/environments-with-create-react-app-7b645312c09d).
 
 You can work with a back-end dev to get the back-end API running on your local machine, but you do not have to.
+
+#### my Questions:
+why password and token are different? 
+### Notes from accouts app:
+password > 6 digits 
+must login using email address
+URLs:
+-sign up: /api/accounts/signup 
+
+### issues:
+
+- 1) has answers?? 
+- 2) count favorite 
+- 3) comments edit and delete does not work, the id has  issues.... 
+- 5) showing tag name for manay to many fields !!!**
+- 6) count answers on question list ~
+
+
+### Study Plan:
+- 1) cunstomise user model 
+- 2) search ...
+- 3) 
