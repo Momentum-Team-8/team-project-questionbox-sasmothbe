@@ -102,8 +102,10 @@ URLs:
 
 ### issues:
 - 1) need to fix accepted question, only user can do it.
-- 2) comments edit and delete does not work, the id has  issues. 
-- 3) count like/vote
+- 2) has answers?? 
+- 3) count favorite 
+- 4) comments edit and delete does not work, the id has  issues.... 
+- 5) showing tag name for manay to many fields !!!**
 
 
 ### Study Plan:

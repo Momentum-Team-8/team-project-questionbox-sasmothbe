@@ -1,3 +1,4 @@
+from django.core.checks import messages
 from django.db.models import Q
 ## search
 from rest_framework.filters import(
@@ -10,7 +11,9 @@ from rest_framework.generics import (
     RetrieveAPIView,
     DestroyAPIView,
     RetrieveUpdateAPIView,
-    CreateAPIView
+    UpdateAPIView,
+    CreateAPIView,
+    get_object_or_404
     )
 from rest_framework.permissions import(
     AllowAny,
@@ -26,10 +29,13 @@ from comments.models import Comment
 from .permissions import IsOwnerOrReadOnly
 
 from .models import Answer
+from questions.models import Question
 from .serializers import (
     AnswerDetailSerializer,
     AnswerCreateSerializer,
     AnswerListSerializer,
+    AcceptAnswerSerializer,
+    UpdateAnswerSerializer
 )
 
 from .pagination import AnswerLimitOffsetPagination,AnswerPageNumberpagination
@@ -101,9 +107,18 @@ class AnswerDelete(DestroyAPIView):
 class AnswerUpdate(RetrieveUpdateAPIView):
     ### only admin and update and delete ... 
     queryset = Answer.objects.all()
-    serializer_class = AnswerCreateSerializer
     permission_classes = [IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly]
+    lookup_field = 'pk'
 
+    ### need instance qustion id 
+    def get_serializer_class(self):
+        ####************* get the instance og the class ... 
+        instance = self.get_object()
+        ####*************
+        if self.request.user == instance.question.author:
+            return AcceptAnswerSerializer
+
+        return UpdateAnswerSerializer
 
 
 

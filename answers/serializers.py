@@ -20,6 +20,7 @@ class AnswerDetailSerializer(serializers.ModelSerializer):
             'user',
             'answer',
             'created_at',
+            "accepted",
             'comments',
         ]
     
@@ -82,6 +83,7 @@ class AnswerListSerializer(serializers.ModelSerializer):
             'delete_url',
             'answer',
             'created_at',
+            "accepted",
         ]
 
     def get_user(self,obj):
@@ -104,6 +106,7 @@ class AnswerListNoLinkSerializer(serializers.ModelSerializer):
             'question_name',
             'answer',
             'created_at',
+            "accepted",
         ]
 
     def get_user(self,obj):
@@ -114,16 +117,23 @@ class AnswerListNoLinkSerializer(serializers.ModelSerializer):
 
 
 class AcceptAnswerSerializer(serializers.ModelSerializer):
-### turn users to show name 
-    user = SerializerMethodField()
+
     class Meta:
         model = Answer
         fields = [
-            'id',
-            'user'
+            "accepted"
         ]
-    
-    def get_user(self,obj):
-        #### question author name 
-        return str(obj.question.author.name)
+    ### read_only_field = ("xx")
 
+class UpdateAnswerSerializer(serializers.ModelSerializer):
+### turn users to show name 
+    class Meta:
+        model = Answer
+        fields = [
+            "answer"
+        ]
+
+        extra_kwargs ={
+            "answer": {'read_only': True }
+        }
+    
