@@ -101,10 +101,10 @@ URLs:
 -sign up: /api/accounts/signup 
 
 ### issues:
-- 1) need to fix accepted question, only user can do it.
-- 2) has answers?? 
-- 3) count favorite 
-- 4) comments edit and delete does not work, the id has  issues.... 
+
+- 1) has answers?? 
+- 2) count favorite 
+- 3) comments edit and delete does not work, the id has  issues.... 
 - 5) showing tag name for manay to many fields !!!**
 - 6) count answers on question list ~
 

@@ -23,7 +23,6 @@ class Question(models.Model):
     favorited_by = models.ManyToManyField(UserAccount, blank=True,  related_name='favorite')
     created_at = models.DateField(default=date.today)
     tags = models.ManyToManyField(Tag, related_name='questions', blank=True)
-    answered = models.BooleanField(default=False)
 
 
     def __str__(self):
