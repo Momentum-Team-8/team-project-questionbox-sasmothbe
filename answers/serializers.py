@@ -133,7 +133,4 @@ class UpdateAnswerSerializer(serializers.ModelSerializer):
             "answer"
         ]
 
-        extra_kwargs ={
-            "answer": {'read_only': True }
-        }
     
