@@ -14,6 +14,8 @@ class Comment(models.Model):
                     related_name="comments",null=True)
     comment_user = models.ForeignKey(UserAccount, on_delete=models.CASCADE,
                     related_name="comments",null=True)
+    ### parent 
+    parent      = models.ForeignKey("self", null=True, blank=True,on_delete=models.CASCADE,)
     content     = models.TextField()
     created_at  = models.DateTimeField(auto_now_add=True)
 

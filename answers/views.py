@@ -107,7 +107,7 @@ class AnswerDelete(DestroyAPIView):
 class AnswerUpdate(RetrieveUpdateAPIView):
     ### only admin and update and delete ... 
     queryset = Answer.objects.all()
-    permission_classes = [IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly,IsAuthenticatedOrReadOnly]
     lookup_field = 'pk'
 
     ### need instance qustion id 
@@ -117,7 +117,7 @@ class AnswerUpdate(RetrieveUpdateAPIView):
         ####*************
         if self.request.user == instance.question.author:
             return AcceptAnswerSerializer
-
+        
         return UpdateAnswerSerializer
 
 

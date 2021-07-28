@@ -29,24 +29,6 @@ from .serializers import CommentSerializer
                         
 
 
-### comment details 
-class CommentDetail(RetrieveAPIView):
-    answer_id = Comment.answer_id
-    permission_classes = (AllowAny, )
-    queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
-
-    
-### comment delete   
-class CommentDelete(DestroyAPIView):
-    ### only owner delete ... 
-    queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly]
-
-
-
-
 #### list all comments
 class CommentList(ListAPIView):
     permission_classes = (AllowAny, )
@@ -73,4 +55,18 @@ class CommentList(ListAPIView):
                     Q(content__icontains=query)
             ).distinct()
         return queryset_list
+
+
+### comment details 
+class CommentDetail(RetrieveAPIView):
+    permission_classes = (AllowAny, )
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    lookup_field = 'pk'
+### comment delete   
+class CommentDelete(DestroyAPIView):
+    ### only owner delete ... 
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly]
 
