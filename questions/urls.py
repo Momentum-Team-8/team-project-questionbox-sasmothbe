@@ -10,8 +10,7 @@ urlpatterns = [
     path('', views.QuestionList.as_view(), name='question-list'),
     path('create/', views.QuestionCreate.as_view(), name='create-question'),
     path('<int:pk>/', views.QuestionDetail.as_view(), name='question-detail'),
-    path('tag/', views.TagList.as_view(), name='tag-list'),
-    
+    path('tag/', views.TagList.as_view(), name='tag-list'), 
 ]
 
 
