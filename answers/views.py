@@ -118,7 +118,8 @@ class AnswerUpdate(RetrieveUpdateAPIView):
         if self.request.user == instance.question.author:
             return AcceptAnswerSerializer
         
-        return UpdateAnswerSerializer
+        if self.request.user == instance.answer_author:
+            return UpdateAnswerSerializer
 
 
 
