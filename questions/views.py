@@ -1,5 +1,5 @@
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from .permissions import IsOwnerOrReadOnly
+from questions.permissions import QuestionIsOwnerOrReadOnly
 from django.shortcuts import render
 from questions.models import Question, Tag
 from questions.serializers import (
@@ -37,7 +37,7 @@ class QuestionCreate(generics.CreateAPIView):
 class QuestionList(generics.ListAPIView):
     queryset = Question.objects.all()
     serializer_class = QuestionListSerializer
-    permissions_classes = (AllowAny, )
+    permission_classes = (AllowAny, )
     
     
 
@@ -50,7 +50,7 @@ class QuestionList(generics.ListAPIView):
 class QuestionDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Question.objects.all()
     serializer_class = QuestionDetailSerializer
-    permissions_classes = (IsOwnerOrReadOnly, )
+    permission_classes = [QuestionIsOwnerOrReadOnly]
 
 
 class TagList(generics.ListAPIView):
