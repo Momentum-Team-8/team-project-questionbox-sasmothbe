@@ -16,7 +16,7 @@ class Tag(models.Model):
 
 
 class Question(models.Model):
-    title = models.CharField(max_length=100, null= True)
+    title = models.CharField(max_length=100)
     body = models.TextField(blank=True)
     author = models.ForeignKey(UserAccount, on_delete=CASCADE)
     image = models.ImageField(upload_to="images", null=True, blank=True,)
