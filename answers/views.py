@@ -26,7 +26,7 @@ from comments.serializers import CommentSerializer
 from comments.models import Comment
 ##### import comments ... end --
 
-from .permissions import IsOwnerOrReadOnly
+from answers.permissions import IsOwnerOrReadOnly
 
 from .models import Answer
 from questions.models import Question
@@ -94,10 +94,10 @@ class AnswerDetail(RetrieveAPIView):
     
 ### ** Answer delete   
 class AnswerDelete(DestroyAPIView):
-    ### only admin and update and delete ... 
+    ### only author can update and delete ... 
     queryset = Answer.objects.all()
     serializer_class = AnswerCreateSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly,IsAuthenticatedOrReadOnly]
 
 
 ### ** Answer update  
