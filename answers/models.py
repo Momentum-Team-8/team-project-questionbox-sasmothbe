@@ -14,7 +14,7 @@ class Answer(models.Model):
                                related_name="answers",null=True, blank=True)
 
     def __str__(self):
-        return f"{self.answer_author.name} {self.question.title}: {self.id}"
+        return f"{self.answer_author.name}: {self.id}"
 
     class Meta:
         ordering = ["accepted", "created_at"]
